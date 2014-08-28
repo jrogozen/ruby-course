@@ -81,3 +81,20 @@ describe 'Exercise3' do
 		expect(result).to eq(-1)
 	end
 end
+
+describe 'Exercise4' do 
+	it "returns nil if empty array" do
+		result = Exercises.ex4([])
+		expect(result).to be_nil
+	end
+
+	it "returns max number when positive" do
+		result = Exercises.ex4([1,0,4,1])
+		expect(result).to eq(4)
+	end
+
+	it "returns max number even if it's negative" do
+		result = Exercises.ex4([-4,-200,-3,-1])
+		expect(result).to eq(-1)
+	end
+end
