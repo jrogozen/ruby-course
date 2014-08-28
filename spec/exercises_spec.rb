@@ -162,3 +162,17 @@ describe 'Exercise8' do
 		result.ex8([{:name => 'Bob', :occupation => 'Builder'}, {:name => 'Jon', :occupation => 'Samurai'}])
 	end
 end
+
+describe 'Exercise9' do
+	it "return true if it is a leap year" do 
+		expect(Exercises.ex9(1996)).to eq(true)
+	end
+
+	it "return false if it is not a leap year" do
+		expect(Exercises.ex9(1995)).to eq(false)
+	end
+
+	it "return nil if it isn't an available year" do
+		expect(Exercises.ex9(-1)).to eq(false)
+	end
+end

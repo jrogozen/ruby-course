@@ -86,7 +86,7 @@ module Exercises
   #    Otherwise, returns `false`
   # Hint: Google for the wikipedia article on leap years
   def self.ex9(time)
-    # TODO
+   ((time % 4 == 0 && time % 100 != 0) || time % 400 == 0) ? true : false
   end
 end
 
