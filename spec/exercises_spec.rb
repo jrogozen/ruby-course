@@ -22,3 +22,23 @@ describe 'Exercise0' do
 		end
 	end
 end
+
+describe 'Exercise1' do
+	context "when array is passed in" do 
+		it "returns size of 3 element array" do
+			result = Exercises.ex1([1,2,3])
+			expect(result).to eq(3)
+		end
+		it "returns size of 0 element array" do
+			result = Exercises.ex1([])
+			expect(result).to eq(0)
+		end
+ 	end
+
+ 	context "when non-array is passed in" do
+ 		it "returns nil if non array is passed in" do
+ 			result = Exercises.ex1("not array")
+ 			expect(result).to be_nil
+ 		end
+ 	end
+end
