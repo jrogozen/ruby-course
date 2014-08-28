@@ -112,3 +112,21 @@ describe 'Exercise5' do
 		result.ex5(["hello", "world"])
 	end
 end
+
+describe 'Exercise6' do
+	context "last item in the array is not panda" do
+		it "changes last item to panda" do
+			result = Exercises.ex6(["my","name","is","jon"])
+			expect(result[-1]).to eq("panda")
+			expect(result.length).to eq(4)
+		end
+	end
+
+	context "last item in the array is panda" do
+		it "update last item to GODZILLA" do
+			result = Exercises.ex6(["i","love","panda"])
+			expect(result[-1]).to eq("GODZILLA")
+			expect(result.length).to eq(3)
+		end
+	end
+end
