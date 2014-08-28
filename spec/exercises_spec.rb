@@ -98,3 +98,17 @@ describe 'Exercise4' do
 		expect(result).to eq(-1)
 	end
 end
+
+describe 'Exercise5' do
+	let(:result) { Exercises }
+
+	it "should return 'hello'" do
+		result.should_receive(:puts).and_return("hello")
+		result.ex5(["hello"])
+	end
+
+	it "should return multiple puts statements" do
+		result.should_receive(:puts).and_return("hello", "world")
+		result.ex5(["hello", "world"])
+	end
+end
