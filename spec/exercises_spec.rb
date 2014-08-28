@@ -64,3 +64,20 @@ describe 'Exercise2' do
 		end
 	end
 end
+
+describe 'Exercise3' do
+	it "returns nil if empty array" do
+		result = Exercises.ex3([])
+		expect(result).to be_nil
+	end
+
+	it "returns correct sum" do
+		result = Exercises.ex3([1,2,3])
+		expect(result).to eq(6)
+	end
+
+	it "works with negative numbers in array" do
+		result = Exercises.ex3([0,1,-2])
+		expect(result).to eq(-1)
+	end
+end
