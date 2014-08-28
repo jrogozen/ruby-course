@@ -150,4 +150,15 @@ describe 'Exercise7' do
 end
 
 describe 'Exercise8' do
+	let (:result) {Exercises}
+
+	it "puts name and occupation for single element" do
+		result.should_receive(:puts).exactly(2).times
+		result.ex8([{:name => 'Bob', :occupation => 'Builder'}])
+	end
+
+	it "puts correct times for multiple people" do
+		result.should_receive(:puts).exactly(4).times
+		result.ex8([{:name => 'Bob', :occupation => 'Builder'}, {:name => 'Jon', :occupation => 'Samurai'}])
+	end
 end
