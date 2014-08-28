@@ -24,7 +24,9 @@ module Exercises
   # Exercise 2
   #  - Returns the second element of an array
   def self.ex2(array)
-    # TODO
+    if array.is_a?(Array) && array.length > 1
+      array[1]
+    end
   end
 
   # Exercise 3
