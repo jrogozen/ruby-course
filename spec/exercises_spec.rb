@@ -130,3 +130,24 @@ describe 'Exercise6' do
 		end
 	end
 end
+
+describe 'Exercise7' do
+	context "'str' exists in the array" do
+		let (:result) {Exercises.ex7([1,3,"str",100], "str")}
+		it "should add 'str' to end of the array" do
+			expect(result[-1]).to eq("str")
+			expect(result.length).to eq(5)
+		end
+	end
+
+	context "'str' does not exist in the array" do
+		it "should NOT add str to the end of the array" do
+			result = Exercises.ex7([1,2,3], "str")
+			expect(result[-1]).to eq(3)
+			expect(result.length).to eq(3)
+		end
+	end
+end
+
+describe 'Exercise8' do
+end
