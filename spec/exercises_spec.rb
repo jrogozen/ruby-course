@@ -176,3 +176,75 @@ describe 'Exercise9' do
 		expect(Exercises.ex9(-1)).to eq(false)
 	end
 end
+
+describe 'Exercise10' do
+	context "it's happy hour" do
+		it "return happy hour" do
+			t = Time.new(2007, 8, 29, 16, 0, 0)
+			#binding.pry
+			allow(Time).to receive(:now).and_return(t)
+			result = Exercises.ex10
+			expect(result).to eq("happy hour")
+		end
+	end
+
+	context "it's not happy hour" do 
+		it "returns normal price" do
+			t = Time.new(2007, 8, 29, 1, 0, 0)
+			allow(Time).to receive(:now).and_return(t)
+			result = Exercises.ex10
+			expect(result).to eq("normal prices")
+		end
+	end
+end
+
+describe RPS do
+	let(:game1) {RPS.new("joe", "shmoe")}
+	let(:score) {game1.score}
+
+	describe "#initialize" do
+		it "should initialize the players" do
+			expect(game1.p1).to eq("joe")
+			expect(game1.p2).to eq("shmoe")
+		end
+
+		it "should set score equal to a zero, zero array" do
+			expect(game1.score).to eq([0,0])
+		end
+	end 
+
+	describe "#play" do
+		it "should only return score on valid plays" do
+			expect(game1.play("scissors", "x")).to be_nil
+			expect(game1.play("scissors", "rock")).to eq(score)
+		end
+
+		it "should add score to correct person" do
+			# simulate a move
+			game1.play("rock", "scissors")
+			expect(score).to eq([1,0])
+			game1.play("scissors", "rock")
+			expect(score).to eq([1,1])
+		end
+
+		it "should add up to 2 scores" do
+			game1.play("rock", "scissors")
+			game1.play("rock", "scissors")
+			expect(score).to eq([2,0])
+		end
+
+		it "should return congrats after 2nd point" do
+			game1.play("rock", "scissors")
+			game1.should_receive(:puts).exactly(1).times
+			game1.play("rock", "scissors")
+		end
+
+		it "should prevent people from playing after game is over" do
+			game1.play("rock", "scissors")
+			game1.play("rock", "scissors")
+			game1.play("rock", "scissors")
+			expect(score1).to eq([0,0])
+		end
+
+	end
+end

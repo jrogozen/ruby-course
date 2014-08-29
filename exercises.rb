@@ -88,6 +88,17 @@ module Exercises
   def self.ex9(time)
    ((time % 4 == 0 && time % 100 != 0) || time % 400 == 0) ? true : false
   end
+
+  # Exercise 10
+  # return happy hour if it is between 4 and 6
+  # otherwise return normal
+  # read stubbing
+  def self.ex10
+    t = Time.now
+      return "happy hour" if t.hour >= 16 && t.hour <= 18
+      return "normal prices"
+  end
+
 end
 
 
@@ -104,32 +115,84 @@ class RPS
   #
   # You will be using this class in the following class, which will let players play
   # RPS through the terminal.
-end
+  attr_accessor :score, :status
+  attr_reader :p1, :p2
 
+  def initialize(p1, p2)
+    @p1 = p1
+    @p2 = p2
+    @score = [0,0]
+    @valid_moves = ["rock", "paper", "scissors"]
+    @status = "on"
+  end
 
-require 'io/console'
-class RPSPlayer
-  # (No specs are required for RPSPlayer)
-  #
-  # Complete the `start` method so that it uses your RPS class to present
-  # and play a game through the terminal.
-  #
-  # The first step is to read (gets) the two player names. Feed these into
-  # a new instance of your RPS class. Then `puts` and `gets` in a loop that
-  # lets both players play the game.
-  #
-  # When the game ends, ask if the player wants to play again.
-  def start
+  def can_play?
+    if @status != "on"
+      puts "Game already over. Exiting"
+      return nil
+    end
+    true
+  end
 
-    # TODO
+  def valid_move?(moves_array)
+    moves_array.each do |move|
+     return false unless @valid_moves.include?(move)
+    end
+  end
 
-    # PRO TIP: Instead of using plain `gets` for grabbing a player's
-    #          move, this line does the same thing but does NOT show
-    #          what the player is typing! :D
-    # This is also why we needed to require 'io/console'
-    # move = STDIN.noecho(&:gets)
+  def play(p1_move, p2_move)
+    # check to see if we can play (should return nil if we can't)
+    if can_play?
+      @temp_moves = [p1_move.downcase, p2_move.downcase]
+      if valid_move?(@temp_moves)
+        if @temp_moves[0] == @temp_moves[1]
+          puts "Tie."
+          return @score
+        end
+        if (@temp_moves[0] == "rock" && @temp_moves[1] != "scissors") || (@temp_moves[0] = "paper" && @temp_moves[1] != "rock")|| (@temp_moves[0] == "scissors" && @temp_moves[1] != "paper")
+          puts "Player 1 wins"
+          @score[0] += 1
+        else
+          @score[1] += 1
+        end
+        return @score
+      end
+
+      # check for winner (move)
+      if @score[0] > 1 || @score[1] > 1
+        puts "Someone won!"
+        @status = "off"
+      end
+    end
+
+    return nil
   end
 end
+
+
+# require 'io/console'
+# class RPSPlayer
+#   # (No specs are required for RPSPlayer)
+#   #
+#   # Complete the `start` method so that it uses your RPS class to present
+#   # and play a game through the terminal.
+#   #
+#   # The first step is to read (gets) the two player names. Feed these into
+#   # a new instance of your RPS class. Then `puts` and `gets` in a loop that
+#   # lets both players play the game.
+#   #
+#   # When the game ends, ask if the player wants to play again.
+#   def start
+
+#     # TODO
+
+#     # PRO TIP: Instead of using plain `gets` for grabbing a player's
+#     #          move, this line does the same thing but does NOT show
+#     #          what the player is typing! :D
+#     # This is also why we needed to require 'io/console'
+#     # move = STDIN.noecho(&:gets)
+#   end
+# end
 
 
 module Extensions
