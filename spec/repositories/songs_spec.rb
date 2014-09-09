@@ -72,4 +72,30 @@ describe Songify::Repositories::Songs do
       expect(result[1].title).to eq("Kiss From a Rose")
     end
   end
+
+  describe '#delete_song' do 
+    it 'returns nil if no song matches id' do
+      result = Songify.songs_repo.delete_song(1)
+      expect(result).to be_nil
+    end
+
+    it 'deletes from database' do
+      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.delete_song(1)
+
+      result = Songify.songs_repo.view_song(1)
+      expect(result).to be_nil
+    end
+  end
+
+  describe '#delete_all' do
+    it 'deletes everything from the table' do
+      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.add_song(song2)
+      Songify.songs_repo.delete_all
+
+      result = Songify.songs_repo.view_song(1)
+      expect(result).to be_nil
+    end
+  end
 end

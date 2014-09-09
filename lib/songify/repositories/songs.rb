@@ -54,6 +54,26 @@ module Songify
         end
       end
 
+      def delete_song(id)
+        # check to see if song id exists
+        if view_song(id)
+          query = <<-SQL
+          DELETE FROM songs
+          WHERE id = '#{id}';
+          SQL
+          @db_adapter.exec(query)
+        else
+          return nil
+        end
+      end
+
+      def delete_all
+        query = <<-SQL
+        TRUNCATE TABLE songs
+        SQL
+        @db_adapter.exec(query)
+      end
+
     end
   end
 end
