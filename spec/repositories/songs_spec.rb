@@ -35,10 +35,41 @@ describe Songify::Repositories::Songs do
 
   describe '#view_song' do
     it 'returns nil if no song with id' do 
-
+      result = Songify.songs_repo.view_song(1)
+      expect(result).to be_nil
     end
 
     it 'returns song object with matching id' do 
+      Songify.songs_repo.add_song(song)
+      result = Songify.songs_repo.view_song(1)
+      expect(result.id).to eq(1)
+      expect(result.title).to eq("2 On")
+    end
+  end
+
+  describe 'view_all_songs' do 
+    it 'returns empty array for no songs' do
+      result = Songify.songs_repo.view_all_songs
+      expect(result.length).to eq(0)
+    end
+
+    it 'returns array of 1 song object' do 
+      Songify.songs_repo.add_song(song)
+      result = Songify.songs_repo.view_all_songs
+
+      expect(result).to be_an(Array)
+      expect(result.length).to eq(1)
+      expect(result[0].title).to eq("2 On")
+    end
+
+    it 'returns array of 2 song objects' do 
+      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.add_song(song2)
+      result = Songify.songs_repo.view_all_songs
+
+      expect(result).to be_an(Array)
+      expect(result.length).to eq(2)
+      expect(result[1].title).to eq("Kiss From a Rose")
     end
   end
 end

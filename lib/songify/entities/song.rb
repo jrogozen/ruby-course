@@ -6,8 +6,8 @@ module Songify
       @title = params.fetch(:title)
 
       # id is set when added to the db
-      @id = nil
-      
+      @id = params[:id]
+
     #   @artist = params.fetch(:artist)
     #   @genre = params[:genre] 
     #   @album = params[:album]
