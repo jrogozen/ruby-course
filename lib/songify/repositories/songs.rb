@@ -19,7 +19,8 @@ module Songify
         VALUES ($1)
         RETURNING *;
         SQL
-        @db_adapter.exec(query, [song.title])
+        result = @db_adapter.exec(query, [song.title])
+        song.instance_variable_set("@id", result.first["id"].to_i)
       end
     end
   end
