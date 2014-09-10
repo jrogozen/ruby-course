@@ -12,22 +12,6 @@ module Songify
     def self.songs_repo
       @@songs_repo
     end
-
-    def self.artists_repo=(x)
-      @@artists_repo = x
-    end
-
-    def self.artists_repo
-      @@artists_repo
-    end
-
-    def self.artists_songs_repo=(x)
-      @@artists_songs_repo = x
-    end
-
-    def self.artists_songs_repo
-      @@artists_songs_repo
-    end
 end
 
 module Songify

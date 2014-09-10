@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Songify</title>
+    <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <header id="header">
+        <div class="header-wrapper">
+          <div class="logo">
+            songify      
+          </div>
+          <nav id="nav">
+            <div class="wrapper">
+              <ul>
+                <li><a href="/">home</a></li>
+                <li><a href="/add">add</a></li>
+                <li><a href="/find">find</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <div id="main" class="content">
+        <div class="wrapper">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

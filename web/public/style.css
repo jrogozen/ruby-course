@@ -1,0 +1,89 @@
+body {
+  background: #232324;
+  font-family: arial, sans-serif;
+  font-size: 16px;
+  color: #787878;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+table {
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+  table-layout: auto; }
+  table th {
+    height: 20px;
+    text-align: left; }
+  table td, table th {
+    padding: 10px; }
+  table tr:nth-child(even) {
+    background: #3F4040; }
+
+a {
+  color: #787878;
+  text-decoration: none; }
+  a:hover {
+    color: white; }
+
+h2 {
+  color: white;
+  font-weight: normal;
+  font-size: 36px;
+  margin: 0;
+  margin-bottom: 20px; }
+
+#container {
+  float: left;
+  width: 100%; }
+
+#header {
+  background: #3F4040;
+  float: left;
+  width: 100px;
+  height: 1000px;
+  text-align: center; }
+  #header .header-wrapper {
+    padding: 20px; }
+  #header .logo {
+    color: #AAD43F; }
+
+#nav {
+  float: left; }
+  #nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    #nav ul li {
+      margin-top: 20px;
+      width: 100%;
+      float: left; }
+      #nav ul li:last-child {
+        margin-bottom: 20px; }
+
+#main {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 20px; }
+  #main form div {
+    float: left; }
+  #main form .input {
+    position: relative; }
+  #main form input[type="text"] {
+    width: 250px;
+    height: 25px;
+    padding: 0 10px; }
+  #main form button {
+    background: none;
+    border: 0; }
+  #main form label {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px; }
+  #main form .fa {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px; }
+
+/*# sourceMappingURL=style.css.map */

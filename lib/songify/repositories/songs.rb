@@ -20,14 +20,24 @@ module Songify
           })
       end
 
-      def add_song(song)
-        query = <<-SQL
-        INSERT INTO songs (title)
-        VALUES ($1)
-        RETURNING *;
-        SQL
-        result = @db_adapter.exec(query, [song.title])
-        song.instance_variable_set("@id", result.first["id"].to_i)
+      def save_song(song)
+        # determine if we should add or update db
+        if song.id.nil?
+          query = <<-SQL
+          INSERT INTO songs (title)
+          VALUES ($1)
+          RETURNING *;
+          SQL
+          result = @db_adapter.exec(query, [song.title])
+          song.instance_variable_set("@id", result.first["id"].to_i)
+        else
+          # book is already in db, should be updated
+          query = <<-SQL
+          UPDATE songs SET (title)
+          VALUES ($1)
+          SQL
+          @db_adapter.exec(sql, [song.title])
+        end
       end
 
       def view_song(id)

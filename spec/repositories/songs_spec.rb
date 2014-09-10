@@ -20,15 +20,15 @@ describe Songify::Repositories::Songs do
       })
   end
 
-  describe '#add_song' do
+  describe '#save_song' do
     it 'adds song to the database' do
-      result = Songify.songs_repo.add_song(song)
+      result = Songify.songs_repo.save_song(song)
       expect(result).to eq(1)
     end
 
     it 'increments id' do 
-      Songify.songs_repo.add_song(song)
-      result = Songify.songs_repo.add_song(song2)
+      Songify.songs_repo.save_song(song)
+      result = Songify.songs_repo.save_song(song2)
       expect(result).to eq(2)
     end
   end
@@ -40,7 +40,7 @@ describe Songify::Repositories::Songs do
     end
 
     it 'returns song object with matching id' do 
-      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.save_song(song)
       result = Songify.songs_repo.view_song(1)
       expect(result.id).to eq(1)
       expect(result.title).to eq("2 On")
@@ -54,7 +54,7 @@ describe Songify::Repositories::Songs do
     end
 
     it 'returns array of 1 song object' do 
-      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.save_song(song)
       result = Songify.songs_repo.view_all_songs
 
       expect(result).to be_an(Array)
@@ -63,8 +63,8 @@ describe Songify::Repositories::Songs do
     end
 
     it 'returns array of 2 song objects' do 
-      Songify.songs_repo.add_song(song)
-      Songify.songs_repo.add_song(song2)
+      Songify.songs_repo.save_song(song)
+      Songify.songs_repo.save_song(song2)
       result = Songify.songs_repo.view_all_songs
 
       expect(result).to be_an(Array)
@@ -80,7 +80,7 @@ describe Songify::Repositories::Songs do
     end
 
     it 'deletes from database' do
-      Songify.songs_repo.add_song(song)
+      Songify.songs_repo.save_song(song)
       Songify.songs_repo.delete_song(1)
 
       result = Songify.songs_repo.view_song(1)
@@ -90,8 +90,8 @@ describe Songify::Repositories::Songs do
 
   describe '#delete_all' do
     it 'deletes everything from the table' do
-      Songify.songs_repo.add_song(song)
-      Songify.songs_repo.add_song(song2)
+      Songify.songs_repo.save_song(song)
+      Songify.songs_repo.save_song(song2)
       Songify.songs_repo.delete_all
 
       result = Songify.songs_repo.view_song(1)
