@@ -1,17 +1,15 @@
 module Songify
   class Song
-    attr_reader :title, :id
+    attr_reader :title, :id, :rating, :genre
 
     def initialize(params)
       @title = params.fetch(:title)
+      @genre = params[:genre]
 
       # id is set when added to the db
       @id = params[:id]
 
-    #   @artist = params.fetch(:artist)
-    #   @genre = params[:genre] 
-    #   @album = params[:album]
-    #   @rating = params[:rating]
+      @rating = params[:rating] || 0
     end
   end
 end

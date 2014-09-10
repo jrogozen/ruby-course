@@ -5,22 +5,28 @@ describe Songify::Server do
   end
 
   describe "GET /" do
+    # genre
+    let(:pop) do 
+      Songify::Genre.new({
+      :name => "Pop"
+      })
+    end
+
     # songs
     let(:song) do
       Songify::Song.new({
         title: "2 On",
         artist: "Tinashe",
         album: "Aquarius",
-        rating: 5
+        genre: pop
         })
     end
     let (:song2) do
       Songify::Song.new({
         title: "Kiss From a Rose",
         artist: "Seal",
-        genre: "Pop",
+        genre: pop,
         album: "Seal",
-        rating: 10
         })
     end
 
@@ -43,7 +49,7 @@ describe Songify::Server do
     it "shows song id after requested" do 
       Songify.songs_repo.save_song(song)
 
-      get '/song', {:id => 1}
+      get '/song', {:value => 1}
       expect(last_response).to be_ok
       expect(last_response.body).to include "1", "2 On"
     end
@@ -53,20 +59,18 @@ describe Songify::Server do
       expect(last_response).to be_ok
       expect(last_response.body).to include "Add Song"
     end
-
-    xit 'shows form to request song' do 
-      get '/delete'
-      expect(last_response).to be_ok
-      expect(last_response.body).to include "Delete Song"
-    end
-
   end
 
   describe "POST /" do 
     it 'shows the added song' do
-      post '/add', {:title => 'Kiss From a Rose'} 
+      post '/add', {:title => 'Kiss From a Rose', :genre => "Pop"} 
       expect(last_response).to be_ok
       expect(last_response.body).to include "Kiss From a Rose", "added song"
+    end
+  end
+
+  describe "DELETE /" do 
+    xit 'deletes the song from the db' do 
     end
   end
 end

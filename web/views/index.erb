@@ -1,13 +1,25 @@
 <h2>All Songs</h2>
-<table class="songs">
-  <tr>
-    <th>id</th>
-    <th>title</th>
-  </tr>
+<ul class="songs">
+  <li class="headers">
+    <div class="rating">rating</div>
+    <div class="title">title</div>
+    <div class="genre">genre</div>
+    <div class="youtube">youtube</div>
+  </li>
   <% @songs.each do |song| %>
-  <tr>
-    <td><%= song.id %></td>
-    <td><%= song.title %></td>
-  </tr>
+  <li>
+    <div class="rating">
+      <span class="rating-number"><%= song.rating %></span>
+      <a href="/rating?id=<%=song.id%>&rating=1" class="fa fa-arrow-up"></a>
+      <a href="/rating?id=<%=song.id%>&rating=-1" class="fa fa-arrow-down"></a>
+    </div>
+    <div class="title">
+      <a href="/song?id=<%=song.id%>"><%= song.title %></a></div>
+    <div class="genre">
+      <%= song.genre %>
+    </div>
+    <div class="youtube"><a target="_blank" href="http://www.youtube.com/results?search_query=<%=song.title%>">play</a></div>
+  </li>
   <% end %>
-</table>
+</ul>
+

@@ -1,38 +1,19 @@
 $sidebar: #3F4040;
 $ltgrey: #787878;
 $dkgrey: #232324;
+$darkestgrey: #18181A;
 $green: #AAD43F;
 
 body {
   background: $dkgrey;
 
-  font-family: arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: $ltgrey;
 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-table {
-  width: 100%;
-  border: 0;
-  border-collapse: collapse;
-  table-layout: auto;
-
-  th {
-    height: 20px;
-    text-align: left;
-  }
-
-  td, th {
-    padding: 10px;
-  }
-
-  tr:nth-child(even) {
-    background: $sidebar;
-  }
 }
 
 a {
@@ -49,6 +30,9 @@ h2 {
   font-size: 36px;
   margin: 0;
   margin-bottom: 20px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid white;
+  width: 100%;
 }
 
 #container {
@@ -129,4 +113,62 @@ h2 {
       height: 30px;
     }
   }
+
+  // songs list
+  .songs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      float: left;
+      width: 100%;
+      padding: 10px;
+
+      &:nth-child(even) {
+        background: $darkestgrey;
+      }
+
+      &.headers {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: $green;
+
+        .rating {
+          border: 0;
+          background: none;
+        }
+      }
+
+      // .id  {
+      //   float: left;
+      //   width: 50px;
+      // }
+
+      .rating {
+        float: left;
+        width: 100px;
+      }
+      .title {
+        float: left;
+        width: 300px;
+      }
+      .genre {
+        float: left;
+
+      }
+      .youtube {
+        float: right;
+      }
+    }
+  }
+}
+
+//ratings 
+.rating {
+ .rating-number {
+    margin-right: 5px;
+    display: inline-block;
+    width: 15px;
+ }
 }

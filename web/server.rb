@@ -1,6 +1,7 @@
 require_relative '../app.rb'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'pry-byebug'
 
 class Songify::Server < Sinatra::Base
   configure :development do
@@ -26,7 +27,15 @@ class Songify::Server < Sinatra::Base
 
   get '/song' do
     puts params
-    @song = Songify.songs_repo.view_song(params[:id])
+
+    # how to determine if it's an integer or string?
+    # binding.pry
+    if params[:value].to_i == 0
+      query = params[:value]
+    else
+      query = params[:value].to_i
+    end
+    @song = Songify.songs_repo.view_song(query)
     erb :view_song
   end
 
@@ -34,20 +43,34 @@ class Songify::Server < Sinatra::Base
     erb :add_song
   end
 
-  get '/delete' do 
-    erb :delete_song
+  get '/rating' do
+
+    # puts params
+
+    Songify.songs_repo.change_rating(params[:id], params[:rating])
+
+    redirect '/'
   end
 
   # post requests
 
   post '/add' do
     puts params
-    id = Songify.songs_repo.save_song(Songify::Song.new({title: params[:title]}))
+    id = Songify.songs_repo.save_song(
+      Songify::Song.new(
+        {
+          title: params[:title], 
+          genre: Songify::Genre.new(name: params[:genre])
+        }
+      )
+    )
+    
     @song = Songify.songs_repo.view_song(id)
     erb :submitted_song
   end
 
-  # delete requests 
+  # delete requests
+
 
   run! if app_file == $0
 end

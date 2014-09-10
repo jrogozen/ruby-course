@@ -7,7 +7,9 @@ module Songify
         query = <<-SQL
         CREATE TABLE IF NOT EXISTS songs (
           id SERIAL PRIMARY KEY,
-          title TEXT
+          title TEXT,
+          rating INTEGER,
+          genre_id INTEGER REFERENCES genres (id)
         );
         SQL
         @db_adapter.exec(query)
@@ -16,38 +18,71 @@ module Songify
       def build_entity(params)
         Songify::Song.new({
             title: params[:title],
-            id: params[:id].to_i
+            id: params[:id].to_i,
+            rating: params[:rating].to_i,
+            genre: params[:genre_name]
           })
       end
 
-      def save_song(song)
+      def save_song(song)  
+        # do we have to add genre to the db?
+        query = <<-SQL
+          SELECT * FROM genres
+          WHERE name ~~* '#{song.genre.name}'
+        SQL
+        genre = @db_adapter.exec(query).first
+
+        if genre.nil?
+          song.genre.id = Songify.genres_repo.add_genre(song.genre)
+        else
+          song.genre.id = genre["id"].to_i
+        end
+
         # determine if we should add or update db
         if song.id.nil?
           query = <<-SQL
-          INSERT INTO songs (title)
-          VALUES ($1)
+          INSERT INTO songs (title, rating, genre_id)
+          VALUES ($1, $2, $3)
           RETURNING *;
           SQL
-          result = @db_adapter.exec(query, [song.title])
+          result = @db_adapter.exec(query, [song.title, song.rating, song.genre.id])
           song.instance_variable_set("@id", result.first["id"].to_i)
         else
-          # book is already in db, should be updated
+          # song is already in db, should be updated
           query = <<-SQL
-          UPDATE songs SET (title)
-          VALUES ($1)
+          UPDATE songs SET (title, rating, genre_id)
+          VALUES ($1, $2)
           SQL
-          @db_adapter.exec(sql, [song.title])
+          @db_adapter.exec(sql, [song.title, song.rating, song.genre.id])
         end
       end
 
-      def view_song(id)
-        query = <<-SQL
-        SELECT * FROM songs
-        WHERE id = '#{id}' 
-        SQL
-        result = @db_adapter.exec(query).first
-        if result
-          song = build_entity(clean_hash(result))
+      def view_song(value)
+        if value.is_a? (Integer)
+          query = <<-SQL
+          SELECT * FROM songs
+          WHERE id = '#{value}' 
+          SQL
+          result = @db_adapter.exec(query).first
+          result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
+
+          if result
+            song = build_entity(clean_hash(result))
+          end
+
+        else
+          # how to disregard upcase/downcase
+          query = <<-SQL 
+          SELECT * FROM songs
+          where title ~~* '%#{value}%'
+          SQL
+          result = @db_adapter.exec(query).first
+
+          result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
+
+          if result
+            song = build_entity(clean_hash(result))
+          end
         end
       end
 
@@ -60,7 +95,10 @@ module Songify
         if result.empty?
           return result
         else
-          result.map {|hash| build_entity(clean_hash(hash))}
+          result.map do |hash| 
+            hash["genre_name"] = Songify.genres_repo.get_name(hash["genre_id"])
+            build_entity(clean_hash(hash))
+          end
         end
       end
 
@@ -84,6 +122,16 @@ module Songify
         @db_adapter.exec(query)
       end
 
+      def change_rating(id, rating)
+        query = <<-SQL
+          UPDATE songs
+          SET rating = rating + '#{rating}'
+          WHERE id = '#{id}'
+          RETURNING rating;
+        SQL
+        result = @db_adapter.exec(query).first
+        clean_hash(result)
+      end
     end
   end
 end
