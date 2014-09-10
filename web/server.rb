@@ -21,6 +21,11 @@ class Songify::Server < Sinatra::Base
     erb :index
   end
 
+  get '/songs' do
+    @songs = Songify.songs_repo.view_all_songs
+    erb :index
+  end
+
   get '/find' do
     erb :find_song
   end
@@ -29,7 +34,6 @@ class Songify::Server < Sinatra::Base
     puts params
 
     # how to determine if it's an integer or string?
-    # binding.pry
     if params[:value].to_i == 0
       query = params[:value]
     else
@@ -37,24 +41,25 @@ class Songify::Server < Sinatra::Base
     end
     @song = Songify.songs_repo.view_song(query)
     erb :view_song
+    
   end
 
-  get '/add' do
+  # new song (show form)
+  get '/songs/new' do
     erb :add_song
   end
 
+  # change rating
   get '/rating' do
-
     # puts params
-
     Songify.songs_repo.change_rating(params[:id], params[:rating])
-
     redirect '/'
   end
 
   # post requests
 
-  post '/add' do
+  # create song (accept form)
+  post '/song' do
     puts params
     id = Songify.songs_repo.save_song(
       Songify::Song.new(

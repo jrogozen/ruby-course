@@ -40,6 +40,15 @@ describe Songify::Server do
       expect(last_response.body).to include "2 On", "Kiss From a Rose"
     end
 
+    it "loads songs page" do
+      Songify.songs_repo.save_song(song)
+      Songify.songs_repo.save_song(song2)
+
+      get '/songs'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include "2 On", "Kiss From a Rose"
+    end
+
     it "asks for song id" do 
       get '/find'
       expect(last_response).to be_ok
@@ -55,7 +64,7 @@ describe Songify::Server do
     end
 
     it 'shows form to add a song' do
-      get '/add'
+      get '/songs/new'
       expect(last_response).to be_ok
       expect(last_response.body).to include "Add Song"
     end
@@ -63,7 +72,7 @@ describe Songify::Server do
 
   describe "POST /" do 
     it 'shows the added song' do
-      post '/add', {:title => 'Kiss From a Rose', :genre => "Pop"} 
+      post '/song', {:title => 'Kiss From a Rose', :genre => "Pop"} 
       expect(last_response).to be_ok
       expect(last_response.body).to include "Kiss From a Rose", "added song"
     end
