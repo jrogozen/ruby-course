@@ -74,4 +74,12 @@ describe Songify::Repositories::Genres do
       expect(result).to be_nil
     end
   end
+
+  describe '#song_count' do 
+    it 'returns nil for no songs' do 
+    end
+
+    it 'returns song count for genre' do 
+    end
+  end
 end

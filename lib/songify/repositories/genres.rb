@@ -21,6 +21,16 @@ module Songify
       end
 
       def add_genre(genre)
+        query = <<-SQL
+        SELECT * FROM genres
+        WHERE name ~~* '#{genre.name}';
+        SQL
+        genre_check = @db_adapter.exec(query).first
+
+        if !genre_check.nil?
+          return nil
+        end
+
         if genre.id.nil?
           query = <<-SQL
           INSERT INTO genres (name)
@@ -33,7 +43,7 @@ module Songify
           query = <<-SQL
           UPDATE genres 
           SET name = '#{genre.name}'
-          WHERE id = '#{genre.id}';
+          WHERE id = '#{genre_check["id"]}';
           SQL
           @db_adapter.exec(query)
         end
@@ -81,6 +91,9 @@ module Songify
         else
           return nil
         end
+      end
+
+      def song_count(id)
       end
 
     end

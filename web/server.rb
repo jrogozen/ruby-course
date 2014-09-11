@@ -22,12 +22,12 @@ class Songify::Server < Sinatra::Base
     erb :index
   end
 
-  get '/songs' do
+  get '/songs/?' do
     @songs = Songify.songs_repo.view_all_songs
     erb :index
   end
 
-  get '/find' do
+  get '/find/?' do
     erb :find_song
   end
 
@@ -106,7 +106,7 @@ class Songify::Server < Sinatra::Base
   end
 
   # show all genres
-  get '/genres' do 
+  get '/genres/?' do 
     @genres = Songify.genres_repo.all_genres
     erb :genres
   end
@@ -119,6 +119,7 @@ class Songify::Server < Sinatra::Base
   # create genre (success)
   post '/genres' do
     puts params # {:name => "name"}
+
     id = Songify.genres_repo.add_genre(
       Songify::Genre.new(
         {
@@ -126,6 +127,11 @@ class Songify::Server < Sinatra::Base
         }
       )
     )
+
+    if id.nil?
+      redirect '/'
+    end
+
     @genre = Songify.genres_repo.view_genre(id)
     erb :added_genre
   end
