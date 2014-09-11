@@ -13,6 +13,13 @@ module Songify
         @db_adapter.exec(query)
       end
 
+      def build_entity(hash)
+        Songify::Genre.new({
+            :name => hash[:name],
+            :id => hash[:id]
+          })
+      end
+
       def add_genre(genre)
         if genre.id.nil?
           query = <<-SQL
@@ -24,10 +31,24 @@ module Songify
           genre.instance_variable_set("@id", result.first["id"].to_i)
         else
           query = <<-SQL
-          UPDATE genres SET (name)
-          VALUES ($1)
+          UPDATE genres 
+          SET name = '#{genre.name}'
+          WHERE id = '#{genre.id}';
           SQL
-          @db_adapter.exec(sql, [genre.name])
+          @db_adapter.exec(query)
+        end
+      end
+
+      def view_genre(id)
+        query = <<-SQL
+        SELECT * FROM genres
+        WHERE id = '#{id}';
+        SQL
+        result = @db_adapter.exec(query).first
+        if result
+          genre = build_entity(clean_hash(result))
+          genre.instance_variable_set("@id", result["id"].to_i)
+          genre
         end
       end
 
@@ -37,6 +58,29 @@ module Songify
         WHERE id = '#{id}';
         SQL
         @db_adapter.exec(query).first["name"]
+      end
+
+      def all_genres
+        query = <<-SQL
+        SELECT * FROM genres;
+        SQL
+        result = @db_adapter.exec(query).entries
+        result.map do |hash|
+          build_entity(clean_hash(hash))
+        end
+      end
+
+      def delete_genre(id)
+        # check to see if genre id exists
+        if view_genre(id)
+          query = <<-SQL
+          DELETE FROM genres
+          WHERE id = '#{id}';
+          SQL
+          @db_adapter.exec(query)
+        else
+          return nil
+        end
       end
 
     end

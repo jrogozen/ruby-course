@@ -1,0 +1,29 @@
+<h2>Edit <%= @song.title %></h2>
+<form method="post">
+
+  <div>
+    <label for="genre">Edit Genre</label>
+    <select name="genre">
+      <% @genres.each do |genre| %>
+      <option value="<%= genre.name %>"><%= genre.name %></option>
+      <% end %>
+    </select>
+    <label for="title">Edit Title</label>
+    <div class="input">
+      <input type="text" id="title" name="title"/>
+      <button type="submit" class="fa fa-chevron-right">
+      </button>
+    </div>
+  </div>
+
+    <input name="_method" type="hidden" value="put">
+    <input name="id" type="hidden" value="<%= @song.id %>">
+    <input name="rating" type="hidden" value="<%= @song.rating %>">
+    <input name="genre_id" type="hidden" value="<%= @song.genre_id %>">
+
+</form>
+
+<form method="post" action="/songs/<%= @song.id %>">
+  <button type="submit">Delete</button>
+  <input name="_method" type="hidden" value="delete">
+</form>

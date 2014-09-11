@@ -5,6 +5,8 @@
     <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= url('/script.js') %>"></script>
   </head>
   <body>
     <div id="container">
@@ -17,7 +19,13 @@
             <div class="wrapper">
               <ul>
                 <li><a href="/">home</a></li>
-                <li><a href="/songs/new">add</a></li>
+                <li class="add">
+                  <a href="#">add</a>
+                  <ul class="sub">
+                    <li><a href="/songs/new">song</a></li>
+                    <li><a href="/genres/new">genre</a></li>
+                  </ul>
+                </li>
                 <li><a href="/find">find</a></li>
               </ul>
             </div>

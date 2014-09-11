@@ -20,7 +20,8 @@ module Songify
             title: params[:title],
             id: params[:id].to_i,
             rating: params[:rating].to_i,
-            genre: params[:genre_name]
+            genre: params[:genre_name],
+            genre_id: params[:genre_id]
           })
       end
 
@@ -50,10 +51,11 @@ module Songify
         else
           # song is already in db, should be updated
           query = <<-SQL
-          UPDATE songs SET (title, rating, genre_id)
-          VALUES ($1, $2)
+          UPDATE songs 
+          SET title = '#{song.title}', rating = '#{song.rating}', genre_id = '#{song.genre.id}'
+          WHERE id = '#{song.id}';
           SQL
-          @db_adapter.exec(sql, [song.title, song.rating, song.genre.id])
+          @db_adapter.exec(query)
         end
       end
 
@@ -64,12 +66,10 @@ module Songify
           WHERE id = '#{value}' 
           SQL
           result = @db_adapter.exec(query).first
-          result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
-
           if result
+            result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
             song = build_entity(clean_hash(result))
           end
-
         else
           # how to disregard upcase/downcase
           query = <<-SQL 
@@ -77,10 +77,8 @@ module Songify
           where title ~~* '%#{value}%'
           SQL
           result = @db_adapter.exec(query).first
-
-          result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
-
           if result
+            result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
             song = build_entity(clean_hash(result))
           end
         end

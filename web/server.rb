@@ -12,6 +12,7 @@ class Songify::Server < Sinatra::Base
     set :bind, '0.0.0.0.'
     set :static, true
     set :public_folder, 'public'
+    enable :method_override
   end
 
   # get requests
@@ -30,7 +31,7 @@ class Songify::Server < Sinatra::Base
     erb :find_song
   end
 
-  get '/song' do
+  get '/results' do
     puts params
 
     # how to determine if it's an integer or string?
@@ -41,12 +42,17 @@ class Songify::Server < Sinatra::Base
     end
     @song = Songify.songs_repo.view_song(query)
     erb :view_song
-    
   end
 
   # new song (show form)
   get '/songs/new' do
+    @genres = Songify.genres_repo.all_genres
     erb :add_song
+  end
+
+  get '/songs/:id' do 
+    @song = Songify.songs_repo.view_song(params[:id].to_i)
+    erb :view_song
   end
 
   # change rating
@@ -55,8 +61,6 @@ class Songify::Server < Sinatra::Base
     Songify.songs_repo.change_rating(params[:id], params[:rating])
     redirect '/'
   end
-
-  # post requests
 
   # create song (accept form)
   post '/song' do
@@ -69,12 +73,90 @@ class Songify::Server < Sinatra::Base
         }
       )
     )
-    
+
     @song = Songify.songs_repo.view_song(id)
     erb :submitted_song
   end
 
-  # delete requests
+  # edit song (show form)
+  get '/songs/:id/edit' do
+    @genres = Songify.genres_repo.all_genres
+    @song = Songify.songs_repo.view_song(params[:id].to_i) 
+    erb :edit_song
+  end
+
+  # edit song (completed)
+  put '/songs/:id/edit' do
+    puts params
+    song = Songify::Song.new({
+      :id => params[:id].to_i,
+      :title => params[:title],
+      :rating => params[:rating].to_i,
+      :genre => Songify::Genre.new(name: params["genre"], id: params["genre_id"])
+      })
+    Songify.songs_repo.save_song(song)
+    redirect '/'
+  end
+
+  # delete songs
+  delete '/songs/:id' do 
+    puts params
+    Songify.songs_repo.delete_song(params[:id].to_i)
+    redirect '/'
+  end
+
+  # show all genres
+  get '/genres' do 
+    @genres = Songify.genres_repo.all_genres
+    erb :genres
+  end
+
+  # add genre (form)
+  get '/genres/new' do
+    erb :new_genre_form
+  end
+
+  # create genre (success)
+  post '/genres' do
+    puts params # {:name => "name"}
+    id = Songify.genres_repo.add_genre(
+      Songify::Genre.new(
+        {
+          name: params[:name], 
+        }
+      )
+    )
+    @genre = Songify.genres_repo.view_genre(id)
+    erb :added_genre
+  end
+
+  # show specific genre
+  get '/genres/:id' do
+    @genre = Songify.genres_repo.view_genre(params[:id].to_i)
+    erb :genre
+  end
+
+  # update genre
+  get '/genres/:id/edit' do
+    @genre = Songify.genres_repo.view_genre(params[:id].to_i)
+    erb :edit_genre
+  end
+
+  put '/genres/:id' do
+    genre = Songify::Genre.new({
+      :name => params[:name],
+      :id => params[:id]
+    }) 
+    Songify.genres_repo.add_genre(genre)
+    redirect '/'
+  end
+
+  # delete genre
+  delete 'genres/:id' do 
+    Songify.genres_repo.delete_genre(params[:id].to_i)
+    redirect '/'
+  end
+
 
 
   run! if app_file == $0

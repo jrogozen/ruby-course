@@ -58,7 +58,7 @@ describe Songify::Server do
     it "shows song id after requested" do 
       Songify.songs_repo.save_song(song)
 
-      get '/song', {:value => 1}
+      get '/songs/1'
       expect(last_response).to be_ok
       expect(last_response.body).to include "1", "2 On"
     end

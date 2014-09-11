@@ -39,14 +39,13 @@ h2 {
   float: left;
   width: 100%;
   .wrapper {
-    // width: 960px;
-    // margin: 0 auto;
-    // overflow: hidden;
+
   }
 }
 
 //header 
 #header {
+  padding-top: 20px;
   background: $sidebar;
   float: left;
   width: 100px;
@@ -54,7 +53,7 @@ h2 {
   text-align: center;
 
   .header-wrapper {
-    padding: 20px;
+    // padding: 20px;
   }
   .logo {
     color: $green;
@@ -63,8 +62,11 @@ h2 {
 
 //nav
 #nav {
+  margin-top: 20px;
   float: left;
   ul {
+    float: left;
+    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -72,8 +74,18 @@ h2 {
       margin-top: 20px;
       width: 100%;
       float: left;
-      &:last-child {
-        margin-bottom: 20px;
+      ul { // 2nd level
+        display: none;
+        margin-top: 20px;
+        padding: 0;
+        background: $dkgrey;
+        li {
+          padding: 10px 0;
+          margin: 0;
+          &:first-child {
+            border-bottom: 2px solid $sidebar;
+          }
+        }
       }
     }
   }
@@ -115,7 +127,7 @@ h2 {
   }
 
   // songs list
-  .songs {
+  .songs, .genres {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -139,11 +151,6 @@ h2 {
           background: none;
         }
       }
-
-      // .id  {
-      //   float: left;
-      //   width: 50px;
-      // }
 
       .rating {
         float: left;

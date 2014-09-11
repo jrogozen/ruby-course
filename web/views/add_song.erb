@@ -1,8 +1,15 @@
 <h2>Add Song</h2>
 <form method="POST" action="/song">
   <div>
-    <label for="genre">Song Genre</label>
-    <input type="text" id="genre" name="genre"/>
+
+    <label for="genre">Select Genre</label>
+
+    <select name="genre">
+      <% @genres.each do |genre| %>
+      <option value="<%= genre.name %>"><%= genre.name %></option>
+      <% end %>
+    </select>
+
     <label for="title">Song Title</label>
     <div class="input">
       <input type="text" id="title" name="title"/>

@@ -28,19 +28,21 @@ h2 {
   width: 100%; }
 
 #header {
+  padding-top: 20px;
   background: #3F4040;
   float: left;
   width: 100px;
   height: 1000px;
   text-align: center; }
-  #header .header-wrapper {
-    padding: 20px; }
   #header .logo {
     color: #AAD43F; }
 
 #nav {
+  margin-top: 20px;
   float: left; }
   #nav ul {
+    float: left;
+    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0; }
@@ -48,8 +50,16 @@ h2 {
       margin-top: 20px;
       width: 100%;
       float: left; }
-      #nav ul li:last-child {
-        margin-bottom: 20px; }
+      #nav ul li ul {
+        display: none;
+        margin-top: 20px;
+        padding: 0;
+        background: #232324; }
+        #nav ul li ul li {
+          padding: 10px 0;
+          margin: 0; }
+          #nav ul li ul li:first-child {
+            border-bottom: 2px solid #3F4040; }
 
 #main {
   margin-left: 200px;
@@ -75,32 +85,32 @@ h2 {
     top: 0;
     right: 0;
     height: 30px; }
-  #main .songs {
+  #main .songs, #main .genres {
     list-style: none;
     margin: 0;
     padding: 0; }
-    #main .songs li {
+    #main .songs li, #main .genres li {
       float: left;
       width: 100%;
       padding: 10px; }
-      #main .songs li:nth-child(even) {
+      #main .songs li:nth-child(even), #main .genres li:nth-child(even) {
         background: #18181A; }
-      #main .songs li.headers {
+      #main .songs li.headers, #main .genres li.headers {
         margin-bottom: 10px;
         font-size: 18px;
         color: #AAD43F; }
-        #main .songs li.headers .rating {
+        #main .songs li.headers .rating, #main .genres li.headers .rating {
           border: 0;
           background: none; }
-      #main .songs li .rating {
+      #main .songs li .rating, #main .genres li .rating {
         float: left;
         width: 100px; }
-      #main .songs li .title {
+      #main .songs li .title, #main .genres li .title {
         float: left;
         width: 300px; }
-      #main .songs li .genre {
+      #main .songs li .genre, #main .genres li .genre {
         float: left; }
-      #main .songs li .youtube {
+      #main .songs li .youtube, #main .genres li .youtube {
         float: right; }
 
 .rating .rating-number {
