@@ -1,121 +1,103 @@
+.main-table {
+  margin-top: 15px; }
+
+.song-container {
+  float: left;
+  width: 100%;
+  padding: 15px 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: 1px solid #66B3FD; }
+  .song-container:hover {
+    background: #91C9FF; }
+  .song-container .rating {
+    float: left;
+    width: 10%; }
+    .song-container .rating .votes {
+      float: left;
+      width: 50%;
+      padding-top: 9px; }
+    .song-container .rating .up-down-vote-container {
+      float: left;
+      width: 50%; }
+  .song-container .song-info {
+    float: left;
+    width: 90%; }
+    .song-container .song-info .song-info-left {
+      float: left;
+      width: 70%; }
+    .song-container .song-info .song-info-right {
+      float: left;
+      width: 30%;
+      text-align: right; }
+
 body {
-  background: #232324;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #787878;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; }
+  color: #000; }
+  body a {
+    color: #000; }
+    body a:hover {
+      color: white; }
+  body p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000; }
 
-a {
-  color: #787878;
-  text-decoration: none; }
-  a:hover {
-    color: white; }
+.songify-description {
+  color: white; }
 
-h2 {
-  color: white;
-  font-weight: normal;
-  font-size: 36px;
-  margin: 0;
-  margin-bottom: 20px;
-  padding-bottom: 25px;
-  border-bottom: 2px solid white;
-  width: 100%; }
+.song-title {
+  font-size: 18px;
+  line-height: 18px; }
 
-#container {
-  float: left;
-  width: 100%; }
+.top-nav a {
+  font-size: 18px; }
+  .top-nav a:hover {
+    color: #FF805B;
+    text-decoration: none; }
+.top-nav ul li a {
+  color: white; }
 
-#header {
-  padding-top: 20px;
-  background: #3F4040;
-  float: left;
-  width: 100px;
-  height: 1000px;
-  text-align: center; }
-  #header .logo {
-    color: #AAD43F; }
+h1.song-title {
+  font-size: 36px; }
 
-#nav {
-  margin-top: 20px;
-  float: left; }
-  #nav ul {
-    float: left;
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0; }
-    #nav ul li {
-      margin-top: 20px;
-      width: 100%;
-      float: left; }
-      #nav ul li ul {
-        display: none;
-        margin-top: 20px;
-        padding: 0;
-        background: #232324; }
-        #nav ul li ul li {
-          padding: 10px 0;
-          margin: 0; }
-          #nav ul li ul li:first-child {
-            border-bottom: 2px solid #3F4040; }
-
-#main {
-  margin-left: 200px;
-  margin-right: 200px;
-  margin-top: 20px; }
-  #main form div {
-    float: left; }
-  #main form .input {
+.top {
+  background: #FFF2BD;
+  padding: 10px 0; }
+  .top .top-nav a {
+    display: inline-block;
+    margin-right: 20px; }
+  .top .top-nav .add {
+    display: inline-block;
     position: relative; }
-  #main form input[type="text"] {
-    width: 250px;
-    height: 25px;
-    padding: 0 10px; }
-  #main form button {
-    background: none;
-    border: 0; }
-  #main form label {
-    float: left;
-    width: 100%;
-    margin-bottom: 10px; }
-  #main form .fa {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 30px; }
-  #main .songs, #main .genres {
-    list-style: none;
+  .top .top-nav ul {
+    padding: 0;
     margin: 0;
-    padding: 0; }
-    #main .songs li, #main .genres li {
-      float: left;
-      width: 100%;
-      padding: 10px; }
-      #main .songs li:nth-child(even), #main .genres li:nth-child(even) {
-        background: #18181A; }
-      #main .songs li.headers, #main .genres li.headers {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #AAD43F; }
-        #main .songs li.headers .rating, #main .genres li.headers .rating {
-          border: 0;
-          background: none; }
-      #main .songs li .rating, #main .genres li .rating {
-        float: left;
-        width: 100px; }
-      #main .songs li .title, #main .genres li .title {
-        float: left;
-        width: 300px; }
-      #main .songs li .genre, #main .genres li .genre {
-        float: left; }
-      #main .songs li .youtube, #main .genres li .youtube {
-        float: right; }
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background: #FFDF5B; }
+    .top .top-nav ul li {
+      width: 150px;
+      padding: 5px 10px; }
 
-.rating .rating-number {
-  margin-right: 5px;
-  display: inline-block;
-  width: 15px; }
+.sidebar .sidebar-content {
+  margin-top: 10%;
+  margin-left: 20%;
+  padding: 20px;
+  background: #DCEBFA;
+  min-height: 300px; }
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .sidebar ul li {
+    padding: 5px 0; }
+
+body {
+  background: #C2E1FF !important; }
 
 /*# sourceMappingURL=style.css.map */

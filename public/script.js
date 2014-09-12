@@ -1,5 +1,7 @@
 $(document).ready(function(){
-  $('#nav li.add').click(function() {
-    $(this).children('.sub').slideToggle("fast");
+
+  $('.top-nav .add').click(function() {
+    $('.top-nav .dropdown').slideToggle("fast");
   });
+
 });

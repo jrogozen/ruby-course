@@ -1,0 +1,47 @@
+.main-table {
+  margin-top: 15px;
+}
+
+.song-container {
+  float: left;
+  width: 100%;
+  padding: 15px 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: 1px solid $border;
+  &:hover {
+    background: $highlight;
+  }
+  .rating {
+    float: left;
+    width: 10%;
+    .votes {
+      float: left;
+      width: 50%;
+      padding-top: 9px;
+    }
+    .up-down-vote-container {
+      float: left;
+      width: 50%;
+      .upvote {
+
+      }
+      .downvote {
+
+      }
+    }
+  }
+  .song-info {
+    float: left;
+    width: 90%;
+    .song-info-left {
+      float: left;
+      width: 70%;
+    }
+    .song-info-right {
+      float: left;
+      width: 30%;
+      text-align: right;
+    }
+  }
+}

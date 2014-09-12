@@ -9,7 +9,8 @@ module Songify
           id SERIAL PRIMARY KEY,
           title TEXT,
           rating INTEGER,
-          genre_id INTEGER REFERENCES genres (id)
+          genre_id INTEGER REFERENCES genres (id),
+          lyrics TEXT
         );
         SQL
         @db_adapter.exec(query)
@@ -21,7 +22,8 @@ module Songify
             id: params[:id].to_i,
             rating: params[:rating].to_i,
             genre: params[:genre_name],
-            genre_id: params[:genre_id]
+            genre_id: params[:genre_id],
+            lyrics: params[:lyrics]
           })
       end
 
@@ -42,17 +44,17 @@ module Songify
         # determine if we should add or update db
         if song.id.nil?
           query = <<-SQL
-          INSERT INTO songs (title, rating, genre_id)
-          VALUES ($1, $2, $3)
+          INSERT INTO songs (title, rating, genre_id, lyrics)
+          VALUES ($1, $2, $3, $4)
           RETURNING *;
           SQL
-          result = @db_adapter.exec(query, [song.title, song.rating, song.genre.id])
+          result = @db_adapter.exec(query, [song.title, song.rating, song.genre.id, song.lyrics])
           song.instance_variable_set("@id", result.first["id"].to_i)
         else
           # song is already in db, should be updated
           query = <<-SQL
           UPDATE songs 
-          SET title = '#{song.title}', rating = '#{song.rating}', genre_id = '#{song.genre.id}'
+          SET title = '#{song.title}', rating = '#{song.rating}', genre_id = '#{song.genre.id}', lyrics = '#{song.lyrics}'
           WHERE id = '#{song.id}';
           SQL
           @db_adapter.exec(query)
@@ -130,6 +132,16 @@ module Songify
         result = @db_adapter.exec(query).first
         clean_hash(result)
       end
+
+      def search_lyrics(lyrics)
+        query = <<-SQL
+          SELECT * FROM songs
+          WHERE lyrics ~~* '%#{lyrics}%';
+        SQL
+        result = @db_adapter.exec(query).entries
+        result.map {|hash| build_entity(clean_hash(hash))}
+      end
+
     end
   end
 end

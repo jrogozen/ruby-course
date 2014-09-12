@@ -1,0 +1,44 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: $text;
+  a {
+    color: $text;
+    &:hover {
+      color: white;
+    }
+  }
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: $text;
+  }
+}
+
+.songify-description {
+  color: white;
+}
+
+.song-title {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.top-nav {
+  a {
+    font-size: 18px;
+    &:hover {
+      color: $nav-hover; 
+      text-decoration: none;
+    }
+  }
+  ul {
+    li a {
+      color: white;
+    }
+  }
+}
+
+h1.song-title {
+  font-size: 36px;
+}

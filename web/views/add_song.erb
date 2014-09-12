@@ -1,20 +1,29 @@
+<div class="col-md-12 full-content">
+
 <h2>Add Song</h2>
 <form method="POST" action="/song">
-  <div>
 
-    <label for="genre">Select Genre</label>
-
+  <label for="genre">Select Genre</label>
+  <div class="genre-box">
     <select name="genre">
       <% @genres.each do |genre| %>
       <option value="<%= genre.name %>"><%= genre.name %></option>
       <% end %>
     </select>
-
-    <label for="title">Song Title</label>
-    <div class="input">
-      <input type="text" id="title" name="title"/>
-      <button type="submit" class="fa fa-chevron-right">
-      </button>
-    </div>
   </div>
+    
+  <label for="lyrics">Lyrics</label>
+  <div class="lyric-box">
+    <textarea id="lyrics" name="lyrics"></textarea>
+  </div>
+
+  <label for="title">Song Title</label>
+  <div class="input">
+    <input type="text" id="title" name="title"/>
+    <button type="submit" class="fa fa-chevron-right">
+    </button>
+  </div>
+
 </form>
+
+</div>

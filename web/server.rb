@@ -69,7 +69,8 @@ class Songify::Server < Sinatra::Base
       Songify::Song.new(
         {
           title: params[:title], 
-          genre: Songify::Genre.new(name: params[:genre])
+          genre: Songify::Genre.new(name: params[:genre]),
+          lyrics: params[:lyrics]
         }
       )
     )
@@ -97,6 +98,19 @@ class Songify::Server < Sinatra::Base
     Songify.songs_repo.save_song(song)
     redirect '/'
   end
+
+  # search songs by lyrics
+  get '/lyrics/?' do 
+    erb :find_lyrics
+  end
+
+  get '/lyrics/results/?' do 
+    puts params #{:lyrics => "string"}
+    @songs = Songify.songs_repo.search_lyrics(params[:lyrics])
+    erb :show_lyrics
+  end
+
+
 
   # delete songs
   delete '/songs/:id' do 
@@ -162,6 +176,7 @@ class Songify::Server < Sinatra::Base
     Songify.genres_repo.delete_genre(params[:id].to_i)
     redirect '/'
   end
+
 
 
 

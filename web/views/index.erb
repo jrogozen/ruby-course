@@ -1,25 +1,49 @@
-<h2>All Songs</h2>
-<ul class="songs">
-  <li class="headers">
-    <div class="rating">rating</div>
-    <div class="title">title</div>
-    <div class="genre">genre</div>
-    <div class="youtube">youtube</div>
-  </li>
-  <% @songs.each do |song| %>
-  <li>
-    <div class="rating">
-      <span class="rating-number"><%= song.rating %></span>
-      <a href="/rating?id=<%=song.id%>&rating=1" class="fa fa-arrow-up"></a>
-      <a href="/rating?id=<%=song.id%>&rating=-1" class="fa fa-arrow-down"></a>
-    </div>
-    <div class="title">
-      <a href="/songs/<%=song.id%>"><%= song.title %></a></div>
-    <div class="genre">
-      <%= song.genre %>
-    </div>
-    <div class="youtube"><a target="_blank" href="http://www.youtube.com/results?search_query=<%=song.title%>">play</a></div>
-  </li>
-  <% end %>
-</ul>
+<div class="col-md-8 left-content">
 
+<h2>All Songs</h2>
+
+<div class="main-table">
+  <% @songs.each do |song| %>
+    <div class="song-container">
+      <div class="rating">
+        <div class="votes">
+          <%= song.rating %>
+        </div>
+        <div class="up-down-vote-container">
+          <div class="upvote">
+            <a href="/rating?id=<%=song.id%>&rating=1" class="fa fa-arrow-up"></a>
+          </div>
+          <div class="downvote">
+            <a href="/rating?id=<%=song.id%>&rating=-1" class="fa fa-arrow-down"></a>
+          </div>
+        </div>
+      </div>
+      <div class="song-info">
+        <div class="song-info-left">
+          <div class="song-title">
+            <a href="/songs/<%=song.id%>"><%= song.title %></a>
+          </div>
+          <div class="song-genre">
+            genre: <%= song.genre %>
+          </div>
+        </div>
+        <div class="song-info-right">
+          <a target="_blank" href="http://www.youtube.com/results?search_query=<%=song.title%>">play</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>
+
+<div class="col-md-4 sidebar">
+  <div class="sidebar-content">
+    <h3>maybe someday</h3>
+    <ul>
+      <li>this</li>
+      <li>will</li>
+      <li>be something</li>
+    </ul>
+  </div>
+</div>

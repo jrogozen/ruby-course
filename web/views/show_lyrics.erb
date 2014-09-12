@@ -1,0 +1,20 @@
+<div class="col-md-12 full-content">
+
+<h2>Lyrics Results</h2>
+<ul class="lyrics">
+  <li class="headers">
+    <div class="title">title</div>
+    <div class="lyrics"></div>
+  </li>
+  <% @songs.each do |song| %>
+  <li>
+    <div class="title">
+      <a href="/songs/<%=song.id%>"><%= song.title %></a></div>
+    <div class="lyrics">
+      <%= song.lyrics %>
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+</div>

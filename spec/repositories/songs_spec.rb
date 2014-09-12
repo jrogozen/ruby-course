@@ -14,7 +14,8 @@ describe Songify::Repositories::Songs do
       title: "2 On",
       artist: "Tinashe",
       album: "Aquarius",
-      genre: pop
+      genre: pop,
+      lyrics: "I love to get too on."
       })
   end
   let (:song2) do
@@ -22,7 +23,8 @@ describe Songify::Repositories::Songs do
       title: "Kiss From a Rose",
       artist: "Seal",
       genre: pop,
-      album: "Seal"
+      album: "Seal",
+      lyrics: "this rose is too on."
       })
   end
 
@@ -137,6 +139,26 @@ describe Songify::Repositories::Songs do
       Songify.songs_repo.save_song(song)
       result = Songify.songs_repo.change_rating(1, -1)
       expect(result[:rating].to_i).to eq(-1)
+    end
+  end
+
+  describe '#search_lyrics' do 
+    it 'returns nil if no match found' do 
+      result = Songify.songs_repo.search_lyrics("tOo on")
+      
+      expect(result).to be_an(Array)
+      expect(result.length).to eq(0)
+    end
+
+    it 'returns array of songs with matching lyrics' do 
+      Songify.songs_repo.save_song(song)
+      Songify.songs_repo.save_song(song2)
+
+      result = Songify.songs_repo.search_lyrics("tOo on")
+
+      expect(result).to be_an(Array)
+      expect(result.length).to eq(2)
+      expect(result.last.title).to eq("Kiss From a Rose")
     end
   end
 end

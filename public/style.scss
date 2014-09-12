@@ -1,181 +1,22 @@
-$sidebar: #3F4040;
-$ltgrey: #787878;
-$dkgrey: #232324;
-$darkestgrey: #18181A;
-$green: #AAD43F;
+$border: #66B3FD;
+
+$dkgreen: #334F00;
+$green: #789E35;
+
+$background: #C2E1FF;
+$highlight: #91C9FF;
+$sidebar: #DCEBFA;
+$topbar: #FFF2BD;
+$dropdown: #FFDF5B;
+
+
+$nav-hover: #FF805B;
+$text: #000;
+
+@import 'home';
+@import 'fonts';
+@import 'sidebar';
 
 body {
-  background: $dkgrey;
-
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  color: $ltgrey;
-
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  color: $ltgrey;
-  text-decoration: none;
-  &:hover {
-    color: white;
-  }
-}
-
-h2 {
-  color: white;
-  font-weight: normal;
-  font-size: 36px;
-  margin: 0;
-  margin-bottom: 20px;
-  padding-bottom: 25px;
-  border-bottom: 2px solid white;
-  width: 100%;
-}
-
-#container {
-  float: left;
-  width: 100%;
-  .wrapper {
-
-  }
-}
-
-//header 
-#header {
-  padding-top: 20px;
-  background: $sidebar;
-  float: left;
-  width: 100px;
-  height: 1000px;
-  text-align: center;
-
-  .header-wrapper {
-    // padding: 20px;
-  }
-  .logo {
-    color: $green;
-  }
-}
-
-//nav
-#nav {
-  margin-top: 20px;
-  float: left;
-  ul {
-    float: left;
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-      margin-top: 20px;
-      width: 100%;
-      float: left;
-      ul { // 2nd level
-        display: none;
-        margin-top: 20px;
-        padding: 0;
-        background: $dkgrey;
-        li {
-          padding: 10px 0;
-          margin: 0;
-          &:first-child {
-            border-bottom: 2px solid $sidebar;
-          }
-        }
-      }
-    }
-  }
-}
-
-//main 
-#main {
-  margin-left: 200px;
-  margin-right: 200px;
-  margin-top: 20px;
-
-  form {
-    div {
-      float: left;
-    }
-    .input {
-      position: relative;
-    }
-    input[type="text"] {
-      width: 250px;
-      height: 25px;
-      padding: 0 10px;
-    }
-    button {
-      background: none;
-      border: 0;
-    }
-    label {
-      float: left;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .fa {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 30px;
-    }
-  }
-
-  // songs list
-  .songs, .genres {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    li {
-      float: left;
-      width: 100%;
-      padding: 10px;
-
-      &:nth-child(even) {
-        background: $darkestgrey;
-      }
-
-      &.headers {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: $green;
-
-        .rating {
-          border: 0;
-          background: none;
-        }
-      }
-
-      .rating {
-        float: left;
-        width: 100px;
-      }
-      .title {
-        float: left;
-        width: 300px;
-      }
-      .genre {
-        float: left;
-
-      }
-      .youtube {
-        float: right;
-      }
-    }
-  }
-}
-
-//ratings 
-.rating {
- .rating-number {
-    margin-right: 5px;
-    display: inline-block;
-    width: 15px;
- }
+  background: $background !important;
 }

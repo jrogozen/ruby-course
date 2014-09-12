@@ -8,13 +8,17 @@ describe Songify::Song do
       artist: "Tinashe",
       genre: "Pop",
       album: "Aquarius",
-      rating: 5
+      lyrics: "Disregard wenches, acquire currency."
       })
   end
 
   describe '#initialize' do 
     it 'initializes all parameters' do
       expect(song.title).to eq("2 On")
+    end
+
+    it 'initializes lyrics' do 
+      expect(song.lyrics).to eq("Disregard wenches, acquire currency.")
     end
   end
 end
