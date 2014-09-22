@@ -1,0 +1,25 @@
+<div class="col-md-12 full-content">
+
+<h2>Edit <%= @genre.name %></h2>
+<form method="post" action="/genres/<%= @genre.id %>">
+
+  <div>
+    <label for="title">Edit Genre</label>
+    <div class="input">
+      <input type="text" id="name" name="name"/>
+      <button type="submit" class="fa fa-chevron-right">
+      </button>
+    </div>
+  </div>
+
+    <input name="_method" type="hidden" value="put">
+    <input name="id" type="hidden" value="<%= @genre.id %>">
+
+</form>
+
+<form method="post" action="/genres/<%= @genre.id %>">
+  <button type="submit">Delete</button>
+  <input name="_method" type="hidden" value="delete">
+</form>
+
+</div>

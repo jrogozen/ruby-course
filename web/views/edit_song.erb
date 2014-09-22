@@ -1,0 +1,52 @@
+<div class="col-md-12 full-content">
+
+<h2>Edit <%= @song.title %></h2>
+<form class="edit" method="post">
+
+  <label for="genre">Edit Genre</label>
+  <div>
+    <select name="genre">
+      <% @genres.each do |genre| %>
+      <option value="<%= genre.name %>"><%= genre.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+    <label for="title">Edit Title</label>
+    <div>
+      <input type="text" id="title" name="title" value="<%=@song.title%>"/>
+    </div>
+
+    <label>Edit Artists</label>
+    <div class="add-artist-container">
+      <div class="add-artist-field fa fa-plus"><span class="add-artist-text">add artist</span></div>
+      <% @song.artists.each do |artist| %>
+      <div class="artist-box">
+        <input type="text" id="artist" name="artist[]" value="<%= artist.name %>"/>
+        <div class="remove-artist-field fa fa-close"></div>
+      </div>
+      <% end %>
+    </div>
+
+    <div>
+      <button type="submit" class="fa fa-chevron-right"></button>
+    </div>
+
+
+    <input name="_method" type="hidden" value="put">
+    <input name="id" type="hidden" value="<%= @song.id %>">
+    <input name="rating" type="hidden" value="<%= @song.rating %>">
+    <input name="genre_id" type="hidden" value="<%= @song.genre_id %>">
+    <input name="lyrics" type="hidden" value="<%= @song.lyrics %>">
+
+</form>
+
+<form method="post" action="/songs/<%= @song.id %>">
+  <label>Umn, Delete it!!</label>
+  <div>
+  <button type="submit" class="fa fa-remove"></button>
+  </div>
+  <input name="_method" type="hidden" value="delete">
+</form>
+
+</div>

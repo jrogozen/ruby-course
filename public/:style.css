@@ -1,0 +1,42 @@
+/*
+Error: Inconsistent indentation: 2 spaces were used for indentation, but the rest of the document was indented using 8 spaces.
+        on line 55 of style.css
+
+50: /Users/jon/.rvm/gems/ruby-2.1.2/bin/scss:23:in `<main>'
+51: /Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `eval'
+52: /Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `<main>'
+53: *\/
+54: body:before {
+55:   white-space: pre;
+56:   font-family: monospace;
+57:   content: "Error: Invalid CSS after \"#232324\": expected expression (e.g. 1px, bold), was \";\"\A         on line 2 of style.css\A \A 1: body {\A 2:   background: #232324;\A 3:   font-family: 'Roboto', sans-serif;\A 4:   font-size: 16px;\A 5:   color: #787878;\A 6:   margin: 0;\A 7:   padding: 0;"; }
+
+Backtrace:
+style.css:55
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:473:in `block in tabulate'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:431:in `each'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:431:in `each_with_index'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:431:in `tabulate'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:396:in `_to_tree'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/engine.rb:285:in `render_with_sourcemap'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin/compiler.rb:294:in `watch'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/plugin.rb:108:in `method_missing'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:349:in `watch_or_update'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:50:in `process_result'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/exec/base.rb:40:in `parse'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/lib/sass/exec/base.rb:19:in `parse!'
+/Users/jon/.rvm/gems/ruby-2.1.2/gems/sass-3.4.3/bin/scss:13:in `<top (required)>'
+/Users/jon/.rvm/gems/ruby-2.1.2/bin/scss:23:in `load'
+/Users/jon/.rvm/gems/ruby-2.1.2/bin/scss:23:in `<main>'
+/Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `eval'
+/Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Inconsistent indentation: 2 spaces were used for indentation, but the rest of the document was indented using 8 spaces.\A         on line 55 of style.css\A \A 50: /Users/jon/.rvm/gems/ruby-2.1.2/bin/scss:23:in `<main>'\A 51: /Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `eval'\A 52: /Users/jon/.rvm/gems/ruby-2.1.2/bin/ruby_executable_hooks:15:in `<main>'\A 53: */\A 54: body:before {\A 55:   white-space: pre;\A 56:   font-family: monospace;\A 57:   content: \"Error: Invalid CSS after \\"#232324\\": expected expression (e.g. 1px, bold), was \\";\\"\A         on line 2 of style.css\A \A 1: body {\A 2:   background: #232324;\A 3:   font-family: 'Roboto', sans-serif;\A 4:   font-size: 16px;\A 5:   color: #787878;\A 6:   margin: 0;\A 7:   padding: 0;\"; }"; }

@@ -1,0 +1,51 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: $text;
+  a {
+    color: $text;
+    &:hover {
+      color: white;
+    }
+  }
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: $text;
+  }
+}
+
+.songify-description {
+  color: white;
+}
+
+.song-title {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.top-nav {
+  a {
+    font-size: 18px;
+    color: white;
+    &:hover {
+      color: white; 
+      text-decoration: none;
+    }
+  }
+  ul {
+    li a {
+      color: black;
+      &:hover {
+        color: $topbar;
+      }
+    }
+  }
+}
+
+h1.song-title {
+  font-size: 36px;
+}
+.songify-description {
+  color: $subtitles;
+}

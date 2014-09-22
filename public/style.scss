@@ -1,0 +1,21 @@
+$border: #C6A49A;
+
+$background: #F0F2EB;
+$highlight: #F4EAD5;
+
+$topbar: #FF4242;
+$dropdown: #F4FAD2;
+$subtitles: #FF4242;
+
+
+$nav-hover: #1C140D;
+$text: #000;
+
+@import 'home';
+@import 'fonts';
+@import 'sidebar';
+@import 'fields';
+
+body {
+  background: $background !important;
+}

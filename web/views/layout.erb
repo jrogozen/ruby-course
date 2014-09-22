@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Songify</title>
+
+    <!-- Bootstrap -->
+    <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="top">
+      <div class="container">
+
+        <nav class="top-nav">
+          <a href="/">home</a>
+
+          <div class="add">
+            <a href="#">add</a>
+            <ul class="dropdown">
+              <li><a href="/songs/new">song</a></li>
+              <li><a href="/genres/new">genre</a></li>
+            </ul>
+          </div>
+
+          <div class="find-box">
+            <a href="#">find</a>
+          </div>
+          
+          <div class="find-dropdown">
+            <form action="/results"><input type="text" name="value" id="value"/>
+            </form>
+          </div>
+          
+
+          <a href="/genres">genres</a>
+          <a href="/lyrics">lyrics</a>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="songify-header">
+        <h1 class="songify-title">songify</h1>
+        <p class="songify-description">an index of Parag's greatest hits</p>
+      </div>
+
+      <div class="row">
+      <%= yield %>
+      </div>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="<%= url('/script.js') %>"></script>
+  </body>
+</html>
