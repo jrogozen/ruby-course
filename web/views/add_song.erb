@@ -3,8 +3,21 @@
 <h2>Add Song</h2>
 <form method="POST" action="/song">
 
+  <label for="title">Title</label>
+  <div class="box">
+    <input type="text" id="title" name="title"/>
+  </div>
+
+  <label>Artists</label>
+  <div class="add-artist-container">
+    <div class="add-artist-field fa fa-plus"><span class="add-artist-text">add artist</span></div>
+    <div class="artist-box">
+      <input type="text" id="artist" name="artist[]" />
+    </div>
+  </div>
+
   <label for="genre">Select Genre</label>
-  <div class="genre-box">
+  <div class="box">
     <select name="genre">
       <% @genres.each do |genre| %>
       <option value="<%= genre.name %>"><%= genre.name %></option>
@@ -13,16 +26,12 @@
   </div>
     
   <label for="lyrics">Lyrics</label>
-  <div class="lyric-box">
+  <div class="box">
     <textarea id="lyrics" name="lyrics"></textarea>
   </div>
 
-  <label for="title">Song Title</label>
-  <div class="input">
-    <input type="text" id="title" name="title"/>
-    <button type="submit" class="fa fa-chevron-right">
-    </button>
-  </div>
+  <button type="submit" class="fa fa-chevron-right">
+  </button>
 
 </form>
 

@@ -8,11 +8,24 @@ describe Songify::Repositories::Songs do
     })
   end
 
+  # artist
+  let(:tinashe) do 
+    Songify::Artist.new({
+      :name => 'Tinashe'
+    })
+  end
+
+  let (:seal) do 
+    Songify::Artist.new({
+        :name => "Seal"
+    })
+  end
+
   # songs
   let(:song) do
     Songify::Song.new({
       title: "2 On",
-      artist: "Tinashe",
+      artists: [tinashe, seal],
       album: "Aquarius",
       genre: pop,
       lyrics: "I love to get too on."
@@ -21,7 +34,7 @@ describe Songify::Repositories::Songs do
   let (:song2) do
     Songify::Song.new({
       title: "Kiss From a Rose",
-      artist: "Seal",
+      artists: [seal, tinashe],
       genre: pop,
       album: "Seal",
       lyrics: "this rose is too on."
@@ -44,6 +57,9 @@ describe Songify::Repositories::Songs do
       Songify.songs_repo.save_song(song)
       result = Songify.songs_repo.view_song(1)
       expect(result.rating).to eq(0)
+    end
+
+    it 'adds song and artist to' do
     end
   end
 
@@ -159,6 +175,19 @@ describe Songify::Repositories::Songs do
       expect(result).to be_an(Array)
       expect(result.length).to eq(2)
       expect(result.last.title).to eq("Kiss From a Rose")
+    end
+  end
+
+  describe '#sort_song_by_rating' do 
+    it 'returns sorted array' do       
+      song.rating = 100
+      song2.rating = 10
+      Songify.songs_repo.save_song(song)
+      Songify.songs_repo.save_song(song2)
+
+      result = Songify.songs_repo.sort_songs_by_rating
+
+    expect(result.first.id).to eq(1)
     end
   end
 end

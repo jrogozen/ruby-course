@@ -1,0 +1,27 @@
+form {
+  label, input, textarea {
+    width: 50%;
+  }
+
+  > div {
+    margin-bottom: 20px;
+  }
+  > div.add-artist-container {
+    margin-bottom: 10px;
+  }
+
+  .artist-box {
+    input {
+      margin-bottom: 10px;
+    }
+  }
+  .add-artist-field {
+    margin-bottom: 10px;
+  }
+  .add-artist-text {
+    margin-left: 10px;
+  }
+  .remove-artist-field {
+    margin-left: 10px;
+  }
+}

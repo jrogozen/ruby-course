@@ -18,7 +18,18 @@ class Songify::Server < Sinatra::Base
   # get requests
 
   get '/' do
-    @songs = Songify.songs_repo.view_all_songs
+    puts params #=> {:sort => 'rating'}
+
+    sort = params[:sort]
+
+    if sort == "rating" || sort.nil?
+      @songs = Songify.songs_repo.sort_songs_by_rating
+    elsif sort == 'title'
+      @songs = Songify.songs_repo.sort_songs_by_title
+    elsif sort == 'genre'
+      @songs = Songify.songs_repo.sort_songs_by_genre
+    end
+
     erb :index
   end
 
@@ -40,7 +51,11 @@ class Songify::Server < Sinatra::Base
     else
       query = params[:value].to_i
     end
+
     @song = Songify.songs_repo.view_song(query)
+    @artists = []
+    @song.artists.each {|artist| @artists << artist.name}
+
     erb :view_song
   end
 
@@ -52,6 +67,8 @@ class Songify::Server < Sinatra::Base
 
   get '/songs/:id' do 
     @song = Songify.songs_repo.view_song(params[:id].to_i)
+    @artists = []
+    @song.artists.each {|artist| @artists << artist.name}
     erb :view_song
   end
 
@@ -65,15 +82,19 @@ class Songify::Server < Sinatra::Base
   # create song (accept form)
   post '/song' do
     puts params
-    id = Songify.songs_repo.save_song(
-      Songify::Song.new(
+    song = Songify::Song.new(
         {
           title: params[:title], 
           genre: Songify::Genre.new(name: params[:genre]),
-          lyrics: params[:lyrics]
+          lyrics: params[:lyrics],
+          artists: []
         }
-      )
     )
+    params[:artist].each do |artist|
+      song.artists << Songify::Artist.new({:name => artist})
+    end
+
+    id = Songify.songs_repo.save_song(song)
 
     @song = Songify.songs_repo.view_song(id)
     erb :submitted_song
@@ -93,8 +114,15 @@ class Songify::Server < Sinatra::Base
       :id => params[:id].to_i,
       :title => params[:title],
       :rating => params[:rating].to_i,
-      :genre => Songify::Genre.new(name: params["genre"], id: params["genre_id"])
+      :genre => Songify::Genre.new(name: params["genre"], id: params["genre_id"]),
+      :lyrics => params[:lyrics],
+      :artists => []
       })
+
+    params[:artist].each do |artist|
+      song.artists << Songify::Artist.new({:name => artist})
+    end
+    Songify.artists_songs_repo.delete_artist(song.id)
     Songify.songs_repo.save_song(song)
     redirect '/'
   end
@@ -176,8 +204,6 @@ class Songify::Server < Sinatra::Base
     Songify.genres_repo.delete_genre(params[:id].to_i)
     redirect '/'
   end
-
-
 
 
   run! if app_file == $0

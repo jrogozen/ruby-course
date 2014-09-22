@@ -2,7 +2,7 @@
   margin-top: 15px;
 }
 
-.song-container {
+.list-container {
   float: left;
   width: 100%;
   padding: 15px 0;
@@ -31,14 +31,14 @@
       }
     }
   }
-  .song-info {
+  .list-info {
     float: left;
     width: 90%;
-    .song-info-left {
+    .list-info-left {
       float: left;
       width: 70%;
     }
-    .song-info-right {
+    .list-info-right {
       float: left;
       width: 30%;
       text-align: right;

@@ -2,7 +2,7 @@
 .top {
   background: $topbar;
   padding: 10px 0;
-  .top-nav {
+  .top-nav {  
     a {
       display: inline-block;
       margin-right: 20px;
@@ -29,24 +29,20 @@
   }
 }
 
-
-
-
-//right sidebar
-.sidebar {
-  .sidebar-content {
-    margin-top: 10%;
-    margin-left: 20%;
-    padding: 20px;
-    background: $sidebar;
-    min-height: 300px;
+.find-box {
+  display: inline-block;
+  position: relative;
+}
+.find-dropdown {
+  display: none;
+  background: $dropdown;
+  top: 45px;
+  position: absolute;
+  form {
+    padding: 10px;
   }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-      padding: 5px 0;
-    }
+  input {
+    width: 350px;
+    padding: 5px;
   }
 }

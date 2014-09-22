@@ -5,7 +5,7 @@ describe Songify::Song do
   let(:song) do
     Songify::Song.new({
       title: "2 On",
-      artist: "Tinashe",
+      artist: ["Tinashe"],
       genre: "Pop",
       album: "Aquarius",
       lyrics: "Disregard wenches, acquire currency."

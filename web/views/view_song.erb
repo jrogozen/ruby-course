@@ -1,10 +1,15 @@
 <div class="col-md-12 full-content">
 
 <h2>Song</h2>
-  <p>id: <%= @song.id %></p>
-  <p>title: <%= @song.title %></p>
-  <p>genre: <%= @song.genre %></p>
-  <p>genre_id: <%= @song.genre_id %></p>
-  <p>lyrics: <%= @song.lyrics %></p>
+<p>id: <%= @song.id %></p>
+<p>title: <%= @song.title %></p>
+<p>genre: <%= @song.genre %></p>
+<p>genre_id: <%= @song.genre_id %></p>
+<p>lyrics: <%= @song.lyrics %></p>
+
+<p>artists: <%= @artists.join(", ") %></p>
+
+
+<p><a href="/songs/<%= @song.id %>/edit">edit song</a></p>
 
 </div>

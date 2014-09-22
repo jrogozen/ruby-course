@@ -1,21 +1,20 @@
-$border: #66B3FD;
+$border: #C6A49A;
 
-$dkgreen: #334F00;
-$green: #789E35;
+$background: #F0F2EB;
+$highlight: #F4EAD5;
 
-$background: #C2E1FF;
-$highlight: #91C9FF;
-$sidebar: #DCEBFA;
-$topbar: #FFF2BD;
-$dropdown: #FFDF5B;
+$topbar: #FF4242;
+$dropdown: #F4FAD2;
+$subtitles: #FF4242;
 
 
-$nav-hover: #FF805B;
+$nav-hover: #1C140D;
 $text: #000;
 
 @import 'home';
 @import 'fonts';
 @import 'sidebar';
+@import 'fields';
 
 body {
   background: $background !important;

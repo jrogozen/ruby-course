@@ -1,20 +1,26 @@
 <div class="col-md-12 full-content">
 
 <h2>Lyrics Results</h2>
-<ul class="lyrics">
-  <li class="headers">
-    <div class="title">title</div>
-    <div class="lyrics"></div>
-  </li>
+
+<div class="main-table">
   <% @songs.each do |song| %>
-  <li>
-    <div class="title">
-      <a href="/songs/<%=song.id%>"><%= song.title %></a></div>
-    <div class="lyrics">
-      <%= song.lyrics %>
+    <div class="list-container">
+      <div class="list-info">
+        <div class="list-info-left">
+          <div class="list-title">
+            <a href="/songs/<%=song.id%>"><%= song.title %></a>
+          </div>
+          <div class="list-genre">
+            genre: <%= song.genre %>
+          </div>
+          <div class="list-lyrics">
+          <%= song.lyrics %>
+          </div>
+        </div>
+      </div>
     </div>
-  </li>
   <% end %>
-</ul>
+</div>
+
 
 </div>

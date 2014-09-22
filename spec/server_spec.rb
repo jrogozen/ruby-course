@@ -12,24 +12,38 @@ describe Songify::Server do
       })
     end
 
+    # artist
+    let(:tinashe) do 
+      Songify::Artist.new({
+        :name => 'Tinashe'
+      })
+    end
+
+    let (:seal) do 
+      Songify::Artist.new({
+          :name => "Seal"
+      })
+    end
+
     # songs
     let(:song) do
       Songify::Song.new({
         title: "2 On",
-        artist: "Tinashe",
+        artists: [tinashe, seal],
         album: "Aquarius",
-        genre: pop
+        genre: pop,
+        lyrics: "I love to get too on."
         })
     end
     let (:song2) do
       Songify::Song.new({
         title: "Kiss From a Rose",
-        artist: "Seal",
+        artists: [seal, tinashe],
         genre: pop,
         album: "Seal",
+        lyrics: "this rose is too on."
         })
     end
-
 
     it "loads the homepage" do
       Songify.songs_repo.save_song(song)
@@ -67,14 +81,6 @@ describe Songify::Server do
       get '/songs/new'
       expect(last_response).to be_ok
       expect(last_response.body).to include "Add Song"
-    end
-  end
-
-  describe "POST /" do 
-    it 'shows the added song' do
-      post '/song', {:title => 'Kiss From a Rose', :genre => "Pop"} 
-      expect(last_response).to be_ok
-      expect(last_response.body).to include "Kiss From a Rose", "added song"
     end
   end
 

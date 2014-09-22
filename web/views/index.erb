@@ -1,10 +1,16 @@
-<div class="col-md-8 left-content">
+<div class="col-md-12 full-content">
 
 <h2>All Songs</h2>
 
+<nav class="sorter">
+  <a href="/?sort=rating">rating</a>
+  <a href="/?sort=title">title</a>
+  <a href="/?sort=genre">genre</a>
+</nav>
+
 <div class="main-table">
   <% @songs.each do |song| %>
-    <div class="song-container">
+    <div class="list-container">
       <div class="rating">
         <div class="votes">
           <%= song.rating %>
@@ -18,16 +24,16 @@
           </div>
         </div>
       </div>
-      <div class="song-info">
-        <div class="song-info-left">
-          <div class="song-title">
+      <div class="list-info">
+        <div class="list-info-left">
+          <div class="list-title">
             <a href="/songs/<%=song.id%>"><%= song.title %></a>
           </div>
-          <div class="song-genre">
+          <div class="list-genre">
             genre: <%= song.genre %>
           </div>
         </div>
-        <div class="song-info-right">
+        <div class="list-info-right">
           <a target="_blank" href="http://www.youtube.com/results?search_query=<%=song.title%>">play</a>
         </div>
       </div>
@@ -35,15 +41,4 @@
   <% end %>
 </div>
 
-</div>
-
-<div class="col-md-4 sidebar">
-  <div class="sidebar-content">
-    <h3>maybe someday</h3>
-    <ul>
-      <li>this</li>
-      <li>will</li>
-      <li>be something</li>
-    </ul>
-  </div>
 </div>

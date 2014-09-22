@@ -23,7 +23,8 @@ module Songify
             rating: params[:rating].to_i,
             genre: params[:genre_name],
             genre_id: params[:genre_id],
-            lyrics: params[:lyrics]
+            lyrics: params[:lyrics],
+            artists: []
           })
       end
 
@@ -40,6 +41,12 @@ module Songify
         else
           song.genre.id = genre["id"].to_i
         end
+
+        # ensure every artist has an id
+        song.artists.each do |artist|
+          artist.id = Songify.artists_repo.save_artist(artist)
+        end
+
 
         # determine if we should add or update db
         if song.id.nil?
@@ -59,30 +66,54 @@ module Songify
           SQL
           @db_adapter.exec(query)
         end
+
+        # add song id and artist id to artists_songs table
+        song.artists.each do |artist|
+          query = <<-SQL
+            INSERT INTO artists_songs (artist_id, song_id)
+            VALUES ($1, $2)
+            RETURNING *;
+          SQL
+          result = @db_adapter.exec(query, [artist.id, song.id])
+        end
+
+        song.id
       end
 
       def view_song(value)
+        # all artists
+        # build an array of artist objects
+        # build the song
+
         if value.is_a? (Integer)
+
+          artists = Songify.artists_songs_repo.view_artists(value)
+
           query = <<-SQL
-          SELECT * FROM songs
-          WHERE id = '#{value}' 
+            SELECT * FROM songs
+            WHERE id = '#{value}' 
           SQL
           result = @db_adapter.exec(query).first
           if result
             result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
+            
             song = build_entity(clean_hash(result))
+            artists.each {|artist| song.artists << artist}
+            song
           end
+
         else
-          # how to disregard upcase/downcase
+
           query = <<-SQL 
-          SELECT * FROM songs
-          where title ~~* '%#{value}%'
+            SELECT * FROM songs
+            where title ~~* '%#{value}%'
           SQL
           result = @db_adapter.exec(query).first
           if result
             result["genre_name"] = Songify.genres_repo.get_name(result["genre_id"])
             song = build_entity(clean_hash(result))
           end
+          
         end
       end
 
@@ -106,7 +137,7 @@ module Songify
         # check to see if song id exists
         if view_song(id)
           query = <<-SQL
-          DELETE FROM songs
+          DELETE FROM songs CASCADE
           WHERE id = '#{id}';
           SQL
           @db_adapter.exec(query)
@@ -117,7 +148,7 @@ module Songify
 
       def delete_all
         query = <<-SQL
-        TRUNCATE TABLE songs
+        TRUNCATE TABLE songs CASCADE
         SQL
         @db_adapter.exec(query)
       end
@@ -139,8 +170,25 @@ module Songify
           WHERE lyrics ~~* '%#{lyrics}%';
         SQL
         result = @db_adapter.exec(query).entries
-        result.map {|hash| build_entity(clean_hash(hash))}
+        
+        result.map {|hash| hash["genre_name"] = Songify.genres_repo.get_name(hash["genre_id"]); build_entity(clean_hash(hash))}
       end
+
+      def sort_songs_by_rating
+        songs = view_all_songs
+        songs.sort_by {|k| -k.rating}
+      end
+
+      def sort_songs_by_title
+        songs = view_all_songs
+        songs.sort_by {|k| k.title}
+      end
+
+      def sort_songs_by_genre
+        songs = view_all_songs
+        songs.sort_by {|k| k.genre}
+      end
+
 
     end
   end
